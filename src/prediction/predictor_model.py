@@ -11,8 +11,7 @@ from tensorflow.keras.callbacks import Callback, EarlyStopping, LambdaCallback
 from tensorflow.keras.layers import Dense, Input, Layer
 from tensorflow.keras.losses import BinaryCrossentropy
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.regularizers import l1_l2
+from tensorflow.keras.optimizers import Adam, SGD
 
 from logger import get_logger
 
@@ -162,7 +161,8 @@ class TrainableActivationLayer(Layer):
         exp = tf.math.exp(
             -self.lambda_ * sq_diff, name="exp"
         )  # shape = (N, D, num_cps)
-        probs = tf.nn.softmax(exp, name="softmax")  # shape = (N, D, num_cps)
+        probs = exp
+        # probs = tf.nn.softmax(exp, name="softmax")  # shape = (N, D, num_cps)
 
         loc_vals_x_probs = self.location_values * probs # shape = (N, D, num_cps)
 
@@ -185,7 +185,7 @@ class Classifier:
     def __init__(
         self,
         D: Optional[int] = None,
-        lr: Optional[float] = 1e-4,
+        lr: Optional[float] = 1e-3,
         num_cps: Optional[int] = 2,
         **kwargs,
     ):
@@ -195,7 +195,7 @@ class Classifier:
             D (int, optional): Size of the input layer.
                 Defaults to None (set in `fit`).
             lr (int, optional): Learning rate for optimizer.
-                Defaults to 1e-4.
+                Defaults to 1e-3.
             num_cps (int, optional): Number of change points in activitation
                 function.
                 Range: 1 <=num_cps <= 3
@@ -213,9 +213,9 @@ class Classifier:
     def build_model(self):
         input_ = Input(self.D)
         x = input_
-        x = Dense(max(100, self.D*4))(x)
+        x = Dense(min(100, self.D*5))(x)
         x = TrainableActivationLayer(num_cps=self.num_cps)(x)
-        x = Dense(max(20, self.D*0.5))(x)
+        x = Dense(self.D*2)(x)
         x = TrainableActivationLayer(num_cps=self.num_cps)(x)
         x = Dense(1, activation="sigmoid")(x)
         output_ = x
