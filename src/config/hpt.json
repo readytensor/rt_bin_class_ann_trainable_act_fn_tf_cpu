@@ -1,0 +1,21 @@
+{
+  "num_trials": 15,
+  "hyperparameters": [
+    {
+      "name": "lr",
+      "short_desc": "Learning rate for optimizer.",
+      "type": "real",
+      "range_low": 1e-5,
+      "range_high": 1e-1,
+      "search_type": "log-uniform"
+    },
+    {
+      "name": "num_cps",
+      "short_desc": "Number of changepoints for the trainable activation layer.",
+      "type": "int",
+      "range_low": 1,
+      "range_high": 3,
+      "search_type": "uniform"
+    }
+  ]
+}
