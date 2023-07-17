@@ -257,7 +257,7 @@ class Classifier:
             validation_split = 0.15
 
         early_stop_callback = EarlyStopping(
-            monitor=loss_to_monitor, min_delta=1e-3, patience=20
+            monitor=loss_to_monitor, min_delta=1e-3, patience=30
         )
         infcost_stop_callback = InfCostStopCallback()
         logger_callback = LambdaCallback(
