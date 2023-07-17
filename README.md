@@ -244,4 +244,3 @@ Alternatively, you can let tox handle the installation of test dependencies for 
 This project is provided under the MIT License. Please see the [LICENSE](LICENSE) file for more information.
 ## Contact Information
 Repository created by Ready Tensor, Inc. (https://www.readytensor.ai/)
-with Shapley Explanations
