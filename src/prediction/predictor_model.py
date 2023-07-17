@@ -77,7 +77,7 @@ class InfCostStopCallback(Callback):
     def on_epoch_end(self, epoch, logs={}):
         loss_val = logs.get("loss")
         if loss_val == COST_THRESHOLD or tf.math.is_nan(loss_val):
-            logger.warning("Cost is inf, so stopping training!!")
+            logger.warning(f"Cost is {loss_val}, so stopping training!!")
             self.model.stop_training = True
 
 
