@@ -186,7 +186,7 @@ class Classifier:
         self,
         D: Optional[int] = None,
         lr: Optional[float] = 1e-4,
-        num_cps: Optional[int] = 3,
+        num_cps: Optional[int] = 2,
         **kwargs,
     ):
         """Construct a new binary classifier.
