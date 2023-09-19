@@ -23,5 +23,6 @@
     "correlated_feature_dropper": {
       "threshold": 0.98
     }
-  }
+  },
+  "perc_inserted_nulls": 0.05
 }

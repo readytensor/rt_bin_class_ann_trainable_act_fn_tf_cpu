@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 "name": "categorical_feature_1",
                 "description": "some desc.",
                 "dataType": "CATEGORICAL",
-                "categories": ["A", "B", "C"],
+                "categories": ["X", "Y", "Z"],
                 "nullable": True,
             },
         ],

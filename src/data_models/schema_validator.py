@@ -44,6 +44,8 @@ class Target(BaseModel):
 
 
 class DataType(str, Enum):
+    """Enum for the data type of a feature"""
+
     NUMERIC = "NUMERIC"
     CATEGORICAL = "CATEGORICAL"
 
@@ -110,6 +112,7 @@ class SchemaModel(BaseModel):
     modelCategory: str
     schemaVersion: float
     inputDataFormat: str = None
+    encoding: str = None
     id: ID
     target: Target
     features: List[Feature]

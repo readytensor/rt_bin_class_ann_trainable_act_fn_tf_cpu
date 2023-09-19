@@ -114,7 +114,7 @@ def run_training(
             data_schema, train_split_with_nulls, preprocessing_config
         )
         transformed_train_inputs, transformed_train_targets = transform_data(
-            pipeline, target_encoder, train_split
+            pipeline, target_encoder, train_split_with_nulls
         )
         transformed_val_inputs, transformed_val_targets = transform_data(
             pipeline, target_encoder, val_split
@@ -148,7 +148,7 @@ def run_training(
                 hyperparameters=tuned_hyperparameters,
             )
         else:
-            # uses default hyperparameters to train model
+            # use default hyperparameters to train model
             logger.info("Training classifier...")
             default_hyperparameters = read_json_as_dict(
                 default_hyperparameters_file_path

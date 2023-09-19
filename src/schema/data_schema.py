@@ -60,14 +60,14 @@ class BinaryClassificationSchema:
         return self.schema["title"]
 
     @property
-    def summary(self) -> str:
+    def description(self) -> str:
         """
-        Gets the summary of the dataset or problem.
+        Gets the description of the dataset or problem.
 
         Returns:
-            str: A brief summary of the dataset or the problem.
+            str: A brief description of the dataset or the problem.
         """
-        return self.schema["summary"]
+        return self.schema["description"]
 
     @property
     def schema_version(self) -> float:
@@ -88,6 +88,16 @@ class BinaryClassificationSchema:
             str: The format of the input data (e.g., CSV, JSON, etc.).
         """
         return self.schema["inputDataFormat"]
+
+    @property
+    def encoding(self) -> str:
+        """
+        Gets the encoding of the input data.
+
+        Returns:
+            str: The encoding of the input data (e.g., "utf-8", "iso-8859-1", etc.).
+        """
+        return self.schema["encoding"]
 
     def _get_features(self) -> Tuple[List[str], List[str]]:
         """

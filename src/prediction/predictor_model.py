@@ -11,7 +11,7 @@ from tensorflow.keras.callbacks import Callback, EarlyStopping, LambdaCallback
 from tensorflow.keras.layers import Dense, Input, Layer
 from tensorflow.keras.losses import BinaryCrossentropy
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam, SGD
+from tensorflow.keras.optimizers import Adam
 
 from logger import get_logger
 
@@ -161,8 +161,7 @@ class TrainableActivationLayer(Layer):
         exp = tf.math.exp(
             -self.lambda_ * sq_diff, name="exp"
         )  # shape = (N, D, num_cps)
-        probs = exp
-        # probs = tf.nn.softmax(exp, name="softmax")  # shape = (N, D, num_cps)
+        probs = tf.nn.softmax(exp, name="softmax")  # shape = (N, D, num_cps)
 
         loc_vals_x_probs = self.location_values * probs # shape = (N, D, num_cps)
 
@@ -257,7 +256,7 @@ class Classifier:
             validation_split = 0.15
 
         early_stop_callback = EarlyStopping(
-            monitor=loss_to_monitor, min_delta=1e-3, patience=30
+            monitor=loss_to_monitor, min_delta=1e-3, patience=20
         )
         infcost_stop_callback = InfCostStopCallback()
         logger_callback = LambdaCallback(
@@ -369,12 +368,12 @@ class Classifier:
         return classifier_model
 
     def __str__(self):
+        # sort params alphabetically for unit test to run successfully
         return (
-            f"Model name: {self.model_name}\n"
-            f"D: {self.D}\n"
-            f"l1_reg: {self.l1_reg}\n"
-            f"l2_reg: {self.l2_reg}\n"
-            f"lr: {self.lr})"
+            f"Model name: {self.model_name} ("
+            f"D: {self.D}, "
+            f"lr: {self.lr}, "
+            f"num_cps: {self.num_cps})"
         )
 
 

@@ -22,11 +22,11 @@ def test_init():
     schema_dict = {
         "modelCategory": "binary_classification",
         "title": "Test Title",
-        "summary": "Test Summary",
+        "description": "Test description",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
         "id": {"name": "Test ID"},
-        "target": {"name": "Test Target", "classes": ["0", "1"], "nullable": False},
+        "target": {"name": "Test Target", "classes": ["0", "1"]},
         "features": [{"name": "Test feature", "dataType": "NUMERIC", "nullable": True}],
     }
 
@@ -36,7 +36,7 @@ def test_init():
     # Then
     assert schema.model_category == "binary_classification"
     assert schema.title == "Test Title"
-    assert schema.summary == "Test Summary"
+    assert schema.description == "Test description"
     assert schema.schema_version == 1.0
     assert schema.input_data_format == "CSV"
     assert schema.id == "Test ID"
@@ -59,7 +59,7 @@ def test_get_allowed_values_for_categorical_feature():
     schema_dict = {
         "modelCategory": "binary_classification",
         "title": "Test Title",
-        "summary": "Test Summary",
+        "description": "Test description",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
         "id": {"name": "Test ID"},
@@ -98,7 +98,7 @@ def test_get_example_value_for_numeric_feature():
     schema_dict = {
         "modelCategory": "binary_classification",
         "title": "Test Title",
-        "summary": "Test summary",
+        "description": "Test description",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
         "id": {"name": "Test ID"},
@@ -142,7 +142,7 @@ def test_get_description_for_id_target_and_features():
     schema_dict = {
         "modelCategory": "binary_classification",
         "title": "Test Title",
-        "summary": "Test summary",
+        "description": "Test description",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
         "id": {"name": "Test ID", "description": "ID field"},
@@ -197,7 +197,7 @@ def test_is_feature_nullable():
     schema_dict = {
         "modelCategory": "binary_classification",
         "title": "Test Title",
-        "summary": "Test summary",
+        "description": "Test description",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
         "id": {"name": "Test ID", "nullable": False},

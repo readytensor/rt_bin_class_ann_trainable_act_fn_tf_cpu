@@ -145,6 +145,31 @@ def test_accuracy_compared_to_logistic_regression(classifier, synthetic_data):
     assert classifier_accuracy - baseline_accuracy > accuracy_threshold
 
 
+def test_classifier_str_representation(classifier, hyperparameters):
+    """
+    Test the `__str__` method of the `Classifier` class.
+
+    The test asserts that the string representation of a `Classifier` instance is
+    correctly formatted and includes the model name and the correct hyperparameters.
+
+    Args:
+        classifier (Classifier): An instance of the `Classifier` class,
+            created using the `hyperparameters` fixture.
+        hyperparameters (dict): A dictionary of the hyperparameters used to initialize
+            the `classifier`.
+
+    Raises:
+        AssertionError: If the string representation of `classifier` does not
+            match the expected format or if it does not include the correct
+            hyperparameters.
+    """
+    classifier_str = str(classifier)
+
+    assert classifier.model_name in classifier_str
+    for param in hyperparameters.keys():
+        assert param in classifier_str
+
+
 def test_train_predictor_model(synthetic_data, hyperparameters):
     """
     Test that the 'train_predictor_model' function returns a Classifier instance with

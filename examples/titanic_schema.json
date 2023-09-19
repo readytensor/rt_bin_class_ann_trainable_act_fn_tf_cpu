@@ -1,80 +1,67 @@
 {
   "title": "Titanic Passenger Survival dataset",
-  "summary": "The well-known Titanic dataset used to develop models to predict if a passenger survived the shipwreck. ",
+  "description": "The well-known Titanic dataset used to develop models to predict if a passenger survived the shipwreck.",
   "modelCategory": "binary_classification",
   "schemaVersion": 1.0,
   "inputDataFormat": "CSV",
+  "encoding": "utf-8",
   "id": {
-    "name": "PassengerId",
-    "description": "A unique identifier for each passenger in the dataset."
+    "name": "id",
+    "description": "Unique identifier per passenger"
   },
   "target": {
-    "name": "Survived",
+    "name": "survived",
     "description": "A binary variable indicating whether or not the passenger survived (0 = No, 1 = Yes).",
-    "classes": [
-      "0",
-      "1"
-    ]
+    "classes": ["0", "1"]
   },
   "features": [
     {
-      "name": "Pclass",
+      "name": "pclass",
       "description": "Ticket class",
       "dataType": "CATEGORICAL",
-      "categories": [
-        1,
-        2,
-        3
-      ],
+      "categories": [1, 2, 3],
       "nullable": false
     },
     {
-      "name": "Sex",
-      "description": "gender",
+      "name": "sex",
+      "description": "Gender",
       "dataType": "CATEGORICAL",
-      "categories": [
-        "female",
-        "male"
-      ],
+      "categories": ["female", "male"],
       "nullable": false
     },
     {
-      "name": "Age",
+      "name": "age",
       "description": "Age in years",
       "dataType": "NUMERIC",
-      "example": 22.0,
+      "example": 29.0,
       "nullable": true
     },
     {
-      "name": "SibSp",
+      "name": "sibsp",
       "description": "# of siblings / spouses aboard the Titanic",
       "dataType": "NUMERIC",
-      "example": 1,
+      "example": 0,
       "nullable": false
     },
     {
-      "name": "Parch",
+      "name": "parch",
       "description": "# of parents / children aboard the Titanic",
       "dataType": "NUMERIC",
       "example": 0,
       "nullable": false
     },
     {
-      "name": "Fare",
+      "name": "fare",
       "description": "Passenger fare",
       "dataType": "NUMERIC",
-      "example": 7.25,
-      "nullable": false
+      "example": 211.3375,
+      "nullable": true
     },
     {
-      "name": "Embarked",
+      "name": "embarked",
       "description": "Port of embarkation",
       "dataType": "CATEGORICAL",
-      "categories": [
-        "C",
-        "Q",
-        "S"
-      ],
+      "categories": ["C", "Q", "S"],
       "nullable": true
     }
   ]

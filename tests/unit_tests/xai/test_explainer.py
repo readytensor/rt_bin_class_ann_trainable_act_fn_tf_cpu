@@ -6,7 +6,7 @@ from pandas import DataFrame
 from py.path import local as LocalPath
 
 from xai.explainer import (
-    ShapClassificationExplainer,
+    ClassificationExplainer,
     fit_and_save_explainer,
     get_explanations_from_explainer,
     load_explainer,
@@ -20,7 +20,7 @@ def test_fit_explainer(transformed_train_inputs: DataFrame) -> None:
     Args:
         transformed_train_inputs (DataFrame): Transformed train inputs.
     """
-    explainer = ShapClassificationExplainer()
+    explainer = ClassificationExplainer()
     explainer.fit(transformed_train_inputs)
     assert explainer._explainer_data.shape == transformed_train_inputs.shape
 
@@ -33,7 +33,7 @@ def test_build_explainer(transformed_train_inputs: DataFrame, predictor: Any) ->
         transformed_train_inputs (DataFrame): Transformed train inputs.
         predictor (Any): A predictor model object.
     """
-    explainer = ShapClassificationExplainer()
+    explainer = ClassificationExplainer()
     explainer.fit(transformed_train_inputs)
     class_names = ["class_0", "class_1"]  # Assuming binary classification
     shap_explainer = explainer._build_explainer(predictor, class_names)
@@ -53,7 +53,7 @@ def test_get_explanations(
         class_names (List[str]): List of class names.
 
     """
-    explainer = ShapClassificationExplainer()
+    explainer = ClassificationExplainer()
     explainer.fit(transformed_test_inputs)
     explanations = explainer.get_explanations(
         transformed_test_inputs, predictor, class_names
@@ -74,11 +74,11 @@ def test_save_and_load_explainer(
         transformed_train_inputs (DataFrame): Transformed train inputs.
 
     """
-    explainer = ShapClassificationExplainer(max_local_explanations=10)
+    explainer = ClassificationExplainer(max_local_explanations=10)
     explainer.fit(transformed_train_inputs)
     explainer_dir_path = tmpdir.join("explainer")
     explainer.save(explainer_dir_path)
-    loaded_explainer = ShapClassificationExplainer.load(explainer_dir_path)
+    loaded_explainer = ClassificationExplainer.load(explainer_dir_path)
     assert loaded_explainer is not None
     assert loaded_explainer._explainer_data.shape == transformed_train_inputs.shape
     assert loaded_explainer.max_local_explanations == 10

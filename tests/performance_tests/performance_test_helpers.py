@@ -51,6 +51,7 @@ def generate_schema_and_data(rows: int, columns: int) -> Tuple[Dict, pd.DataFram
         "modelCategory": "binary_classification",
         "schemaVersion": 1.0,
         "inputDataFormat": "CSV",
+        "encoding": "utf-8",
         "id": {
             "name": "id",
             "description": "A unique identifier for each record in the dataset.",
